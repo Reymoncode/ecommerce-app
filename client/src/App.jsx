@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import api from './api/axios';
+import { useQuery } from '@tanstack/react-query';
+import { getHealth } from './api/health';
 
 export default function App() {
-  const [status, setStatus] = useState('loading...');
+  const { data, isPending, isError } = useQuery({
+    queryKey: ['health'],
+    queryFn: getHealth,
+  });
 
-  useEffect(() => {
-    api.get('/health')
-      .then((res) => setStatus(res.data.status))
-      .catch(() => setStatus('error'));
-  }, []);
+  let status = data?.status;
+  if (isPending) status = 'loading...';
+  if (isError) status = 'error';
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
