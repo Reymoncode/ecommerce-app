@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import Navbar from './Navbar';
 
 export default function Layout() {
@@ -6,7 +7,8 @@ export default function Layout() {
     <div className="flex min-h-screen flex-col">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-button focus:text-on-accent focus:uppercase">
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-button focus:text-on-accent focus:uppercase"
+      >
         Skip to content
       </a>
       <Navbar />
@@ -14,6 +16,20 @@ export default function Layout() {
         <Outlet />
       </main>
       {/* Footer goes here in Part 10 */}
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          style: {
+            background: 'var(--surface)',
+            color: 'var(--ink)',
+            border: '1px solid var(--border)',
+            borderRadius: '9999px',
+            boxShadow: 'var(--elev-card-hover)',
+            fontFamily: 'var(--ff-body)',
+            fontWeight: 500,
+          },
+        }}
+      />
     </div>
   );
 }
