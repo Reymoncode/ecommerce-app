@@ -1,207 +1,375 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+:root {
+  --parchment: #F6F0E4;      
+  --forest: #1F3D2F;         
+  --forest-hover: #2B4D3D;   
+  --tomato: #B3302A;         
+  --tomato-dark: #8F251F;    
+  --butter: #E9B949;         
+  --ink: #1C1A17;            
+ 
+  --page: var(--parchment);
+  --surface: #FEFCF7;        
+  --surface-sunken: #ECE6D8; 
+  --surface-hover: #F0E9DB;  
+ 
+  --border: #DFD6C8;         
+  --border-strong: #8A7F6C;  
+ 
+  --ink-soft: #433F39;       
+  --ink-muted: #5C574F;      
 
+  --parchment-muted: #D7D0C3;
+ 
+  --disabled-bg: #E3DDD3;
+  --disabled-fg: #7E7A73;    
+  
+  --success: #23643F;        
+  --success-tint: #D9F3DD;
+  --warning: #7A4C18;        
+  --warning-tint: #FDEEC5;
+  --error: #991B3D;          
+  --error-tint: #FFE4E5;
+ 
+  --scrim: rgb(28 26 23 / 0.55);   
+  --skeleton-base: #E7E1D3;
+  --skeleton-shine: #F4EEE1;
+  --placeholder: #E4D9C9;          
+ 
+  --ff-heading: "DM Serif Display", Georgia, "Times New Roman", serif; /* 400 only */
+  --ff-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+ 
+  --fs-label: 0.75rem;   
+  --fs-small: 0.875rem;  
+  --fs-body: 1rem;       
+  --fs-lead: clamp(1.2rem, 1.177rem + 0.101vw, 1.25rem);     
+  --fs-h4: clamp(1.44rem, 1.384rem + 0.247vw, 1.563rem);     
+  --fs-h3: clamp(1.728rem, 1.626rem + 0.455vw, 1.953rem);   
+  --fs-h2: clamp(2.074rem, 1.906rem + 0.743vw, 2.441rem);    
+  --fs-h1: clamp(2.488rem, 2.232rem + 1.138vw, 3.052rem);    
+  --fs-display: clamp(2.986rem, 2.298rem + 3.059vw, 4.5rem);
+ 
+  --lh-display: 1.04;
+  --lh-h1: 1.1;
+  --lh-h2: 1.15;
+  --lh-h3: 1.2;
+  --lh-h4: 1.3;
+  --lh-lead: 1.55;
+  --lh-body: 1.6;
+  --lh-small: 1.5;
+  --lh-label: 1.4;
+ 
+  --ls-display: -0.015em;
+  --ls-h1: -0.01em;
+  --ls-h2: -0.005em;
+  --ls-label: 0.02em;
+ 
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+ 
+  --space-section: 4rem;     
+  --gap-card: 1rem;          
+  --gutter: 1rem;           
+ 
+  --layout-container: 72rem; 
+  --layout-navbar-h: 4rem;   
+  --layout-cartbar-h: 4.5rem;
+  --layout-tap: 2.75rem;     
+  --safe-bottom: env(safe-area-inset-bottom, 0px); 
+ 
+  --r-card: 1rem;            
+  --r-input: 0.75rem;        
+  --r-pill: 9999px;          
+ 
+  --shadow-tint: 74 48 22;
+  --elev-card: 0 1px 2px rgb(var(--shadow-tint) / 0.06), 0 4px 12px rgb(var(--shadow-tint) / 0.07);
+  --elev-card-hover: 0 2px 4px rgb(var(--shadow-tint) / 0.08), 0 12px 28px rgb(var(--shadow-tint) / 0.14);
+  --elev-stamp: 4px 4px 0 0 var(--ink);     
+  --elev-stamp-sm: 2px 2px 0 0 var(--ink);  
+  --elev-drawer: -12px 0 40px rgb(var(--shadow-tint) / 0.22);
+ 
+  --motion-fast: 150ms;
+  --motion-base: 250ms;
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+ 
+  --focus-color: var(--forest);  
+  --focus-width: 3px;
+  --focus-offset: 2px;
+ 
+  --z-navbar: 40;
+  --z-cartbar: 50;
+  --z-scrim: 60;
+  --z-drawer: 70;
+  --z-modal: 80;
+  --z-toast: 90;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --space-section: 6rem;     /* 96px */
+    --gap-card: 1.5rem;        /* 24px */
+    --gutter: 1.5rem;
+    --layout-navbar-h: 4.5rem; /* 72px */
+  }
+}
+ 
+/* Reduced motion: transitions collapse to instant */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0.01ms;
+    --motion-base: 0.01ms;
+  }
+}
+
+@supports (color: oklch(0 0 0)) {
+  :root {
+    --parchment: oklch(0.957 0.017 85);
+    --forest: oklch(0.332 0.044 162);
+    --forest-hover: oklch(0.39 0.05 162);
+    --tomato: oklch(0.511 0.169 28);
+    --tomato-dark: oklch(0.434 0.142 28);
+    --butter: oklch(0.809 0.138 85);
+    --ink: oklch(0.219 0.007 78);
+ 
+    --surface: oklch(0.99 0.006 85);
+    --surface-sunken: oklch(0.925 0.02 85);
+    --surface-hover: oklch(0.935 0.02 85);
+ 
+    --border: oklch(0.88 0.022 82);
+    --border-strong: oklch(0.6 0.03 80);
+ 
+    --ink-soft: oklch(0.37 0.012 78);
+    --ink-muted: oklch(0.46 0.014 78);
+    --parchment-muted: oklch(0.86 0.02 85);
+ 
+    --disabled-bg: oklch(0.9 0.015 82);
+    --disabled-fg: oklch(0.58 0.012 80);
+ 
+    --success: oklch(0.45 0.09 155);
+    --success-tint: oklch(0.94 0.04 150);
+    --warning: oklch(0.46 0.09 65);
+    --warning-tint: oklch(0.95 0.055 90);
+    --error: oklch(0.45 0.16 12);
+    --error-tint: oklch(0.94 0.03 15);
+ 
+    --scrim: oklch(0.219 0.007 78 / 0.55);
+    --skeleton-base: oklch(0.91 0.02 85);
+    --skeleton-shine: oklch(0.95 0.018 85);
+    --placeholder: oklch(0.89 0.025 80);
+  }
+}
+
+@theme inline {
+  /* ---- Colours  →  bg-forest, text-ink-muted, border-border-strong … ---- */
+  --color-*: initial; /* drop Tailwind's default palette so only ours exist */
+  --color-transparent: transparent;
+  --color-current: currentColor;
+ 
+  --color-parchment: var(--parchment);
+  --color-parchment-muted: var(--parchment-muted);
+  --color-forest: var(--forest);
+  --color-forest-hover: var(--forest-hover);
+  --color-tomato: var(--tomato);
+  --color-tomato-dark: var(--tomato-dark);
+  --color-butter: var(--butter);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+ 
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+ 
+  --color-disabled: var(--disabled-bg);
+  --color-disabled-fg: var(--disabled-fg);
+ 
+  --color-success: var(--success);
+  --color-success-tint: var(--success-tint);
+  --color-warning: var(--warning);
+  --color-warning-tint: var(--warning-tint);
+  --color-error: var(--error);
+  --color-error-tint: var(--error-tint);
+ 
+  --color-scrim: var(--scrim);
+  --color-skeleton: var(--skeleton-base);
+  --color-skeleton-shine: var(--skeleton-shine);
+  --color-placeholder: var(--placeholder);
+ 
+  /* ---- Fonts  →  font-heading, font-sans -------------------------------- */
+  --font-heading: var(--ff-heading);
+  --font-sans: var(--ff-body);
+ 
+  --font-weight-*: initial;
+  --font-weight-normal: var(--fw-regular);
+  --font-weight-medium: var(--fw-medium);
+  --font-weight-semibold: var(--fw-semibold);
+  --font-weight-bold: var(--fw-bold);
+ 
+  /* ---- Type scale  →  text-label … text-display (replaces text-sm/xl…) -- */
+  --text-*: initial;
+ 
+  --text-label: var(--fs-label);
+  --text-label--line-height: var(--lh-label);
+  --text-label--letter-spacing: var(--ls-label);
+ 
+  --text-small: var(--fs-small);
+  --text-small--line-height: var(--lh-small);
+ 
+  --text-body: var(--fs-body);
+  --text-body--line-height: var(--lh-body);
+ 
+  --text-lead: var(--fs-lead);
+  --text-lead--line-height: var(--lh-lead);
+ 
+  --text-h4: var(--fs-h4);
+  --text-h4--line-height: var(--lh-h4);
+ 
+  --text-h3: var(--fs-h3);
+  --text-h3--line-height: var(--lh-h3);
+ 
+  --text-h2: var(--fs-h2);
+  --text-h2--line-height: var(--lh-h2);
+  --text-h2--letter-spacing: var(--ls-h2);
+ 
+  --text-h1: var(--fs-h1);
+  --text-h1--line-height: var(--lh-h1);
+  --text-h1--letter-spacing: var(--ls-h1);
+ 
+  --text-display: var(--fs-display);
+  --text-display--line-height: var(--lh-display);
+  --text-display--letter-spacing: var(--ls-display);
+ 
+  /* ---- Spacing  →  p-4 = 16px · py-section · h-navbar · min-h-tap ------- */
+  --spacing: 0.25rem; /* 4px base grid */
+  --spacing-section: var(--space-section);
+  --spacing-card: var(--gap-card);   /* gap-card */
+  --spacing-gutter: var(--gutter);   /* px-gutter */
+  --spacing-navbar: var(--layout-navbar-h);
+  --spacing-cartbar: var(--layout-cartbar-h);
+  --spacing-tap: var(--layout-tap);
+ 
+  --container-site: var(--layout-container); /* max-w-site = 1152px */
+ 
+  /* ---- Radius — exactly three values ------------------------------------ */
+  --radius-*: initial;
+  --radius-2xl: var(--r-card);   /* rounded-2xl  cards  */
+  --radius-xl: var(--r-input);   /* rounded-xl   inputs */
+  --radius-full: var(--r-pill);  /* rounded-full buttons, badges */
+ 
+  /* ---- Shadows  →  shadow-card, shadow-stamp … -------------------------- */
+  --shadow-*: initial;
+  --shadow-card: var(--elev-card);
+  --shadow-card-hover: var(--elev-card-hover);
+  --shadow-stamp: var(--elev-stamp);
+  --shadow-stamp-sm: var(--elev-stamp-sm);
+  --shadow-drawer: var(--elev-drawer);
+ 
+  /* ---- Motion ----------------------------------------------------------- */
+  --ease-out: var(--motion-ease-out);
+  --default-transition-duration: var(--motion-fast);
+  --default-transition-timing-function: var(--motion-ease-out);
+}
+ 
 @theme {
-  /* ---------- Colors: light (default) ---------- */
-  --color-background: #faf7f2;
-  --color-surface: #f3eee6;
-  --color-surface-raised: #ffffff;
-  --color-border: #e3dacb;
-  --color-border-strong: #8c8276;
-
-  --color-char: #1a1714;
-  --color-char-2: #26221e;
-  --color-char-3: #322d28;
-  --color-on-char: #faf7f2; /* text on char surfaces; does not flip in dark mode */
-
-  --color-fg: #1a1714;
-  --color-fg-secondary: #4a433c;
-  --color-fg-muted: #6b6157;
-  --color-fg-inverse: #faf7f2;
-
-  --color-accent: #f4b41a;
-  --color-accent-hover: #e3a008;
-  --color-accent-pressed: #c98a06;
-  --color-accent-tint: #fdf0cc;
-  --color-accent-ink: #8a5a00;
-  --color-on-accent: #1a1714;
-
-  --color-success: #1e7a4a;
-  --color-success-tint: #dcf2e5;
-  --color-success-strong: #14532d;
-  --color-warning: #a85a06;
-  --color-warning-tint: #fcebd6;
-  --color-warning-strong: #7a3e04;
-  --color-error: #c0261b;
-  --color-error-tint: #fbe2df;
-  --color-error-strong: #8f1c13;
-  --color-info: #1d5fa8;
-  --color-info-tint: #ddeaf8;
-  --color-info-strong: #164a84;
-
-  /* ---------- Fonts ---------- */
-  --font-display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
-  --font-display--font-variation-settings: "wdth" 112;
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-
-  --font-weight-regular: 400;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-extrabold: 800;
-  --font-weight-black: 900;
-
-  /* ---------- Type scale (fluid 360px -> 1280px) ---------- */
-  --text-display-xl: clamp(2.75rem, 1.87rem + 3.91vw, 5rem);
-  --text-display-xl--line-height: 0.95;
-  --text-display-xl--letter-spacing: -0.01em;
-  --text-display-xl--font-weight: 900;
-
-  --text-h1: clamp(2.25rem, 1.76rem + 2.17vw, 3.5rem);
-  --text-h1--line-height: 1.05;
-  --text-h1--letter-spacing: -0.01em;
-  --text-h1--font-weight: 900;
-
-  --text-h2: clamp(1.75rem, 1.46rem + 1.3vw, 2.5rem);
-  --text-h2--line-height: 1.1;
-  --text-h2--letter-spacing: -0.005em;
-  --text-h2--font-weight: 800;
-
-  --text-h3: clamp(1.375rem, 1.23rem + 0.65vw, 1.75rem);
-  --text-h3--line-height: 1.2;
-  --text-h3--font-weight: 800;
-
-  --text-h4: clamp(1.125rem, 1.08rem + 0.22vw, 1.25rem);
-  --text-h4--line-height: 1.3;
-  --text-h4--font-weight: 700;
-
-  --text-body-lg: clamp(1.125rem, 1.08rem + 0.22vw, 1.25rem);
-  --text-body-lg--line-height: 1.6;
-
-  --text-body: 1rem;
-  --text-body--line-height: 1.6;
-
-  --text-small: 0.875rem;
-  --text-small--line-height: 1.5;
-
-  --text-label: 0.875rem;
-  --text-label--line-height: 1.4;
-  --text-label--letter-spacing: 0.01em;
-  --text-label--font-weight: 600;
-
-  --text-button: 1rem;
-  --text-button--line-height: 1;
-  --text-button--letter-spacing: 0.06em;
-  --text-button--font-weight: 700;
-
-  --text-price: clamp(1.25rem, 1.2rem + 0.22vw, 1.375rem);
-  --text-price--line-height: 1.2;
-  --text-price--font-weight: 700;
-
-  --text-badge: 0.75rem;
-  --text-badge--line-height: 1;
-  --text-badge--letter-spacing: 0.08em;
-  --text-badge--font-weight: 800;
-
-  --text-nav: 0.875rem;
-  --text-nav--line-height: 1;
-  --text-nav--letter-spacing: 0.08em;
-  --text-nav--font-weight: 600;
-
-  --tracking-display: -0.01em;
-  --tracking-caps: 0.06em;
-  --tracking-caps-wide: 0.08em;
-
-  /* ---------- Radius ---------- */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-
-  /* ---------- Elevation ---------- */
-  --shadow-card: 0 1px 2px rgb(26 23 20 / 0.06), 0 2px 8px rgb(26 23 20 / 0.06);
-  --shadow-raised: 0 4px 12px rgb(26 23 20 / 0.1), 0 12px 32px rgb(26 23 20 / 0.1);
-  --shadow-drawer: -8px 0 40px rgb(26 23 20 / 0.18);
-  --shadow-cta: 0 6px 20px rgb(244 180 26 / 0.35);
-
-  /* ---------- Breakpoints (Tailwind defaults, listed for reference) ---------- */
-  --breakpoint-sm: 40rem;
-  --breakpoint-md: 48rem;
-  --breakpoint-lg: 64rem;
-  --breakpoint-xl: 80rem;
-
-  /* ---------- Motion ---------- */
-  --ease-out-quick: cubic-bezier(0.2, 0, 0, 1);
-  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
-
-  --animate-pop: pop 300ms var(--ease-pop);
-  --animate-drawer-in: drawer-in 280ms var(--ease-drawer);
-  --animate-bar-up: bar-up 300ms var(--ease-pop);
-
-  @keyframes pop {
-    0% { transform: scale(1); }
-    40% { transform: scale(1.12); }
-    100% { transform: scale(1); }
-  }
-  @keyframes drawer-in {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-  }
-  @keyframes bar-up {
-    from { transform: translateY(120%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  /* Breakpoints (media queries cannot read CSS variables, so they live here) */
+  --breakpoint-sm: 40rem;  /* 640 */
+  --breakpoint-md: 48rem;  /* 768 */
+  --breakpoint-lg: 64rem;  /* 1024 */
+  --breakpoint-xl: 80rem;  /* 1280 */
+ 
+  --animate-shimmer: shimmer 1.4s linear infinite;
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
   }
 }
 
-/* ---------- Dark mode: add class="dark" to <html> ---------- */
-.dark {
-  --color-background: #141210;
-  --color-surface: #1e1b18;
-  --color-surface-raised: #282420;
-  --color-border: #3d3630;
-  --color-border-strong: #7a7064;
-
-  --color-fg: #f5f0e8;
-  --color-fg-secondary: #cfc6ba;
-  --color-fg-muted: #a39888;
-  --color-fg-inverse: #1a1714;
-
-  --color-accent-tint: #3a2e12;
-  --color-accent-ink: #f4b41a;
-
-  --color-success: #5bc98a;
-  --color-warning: #f59a4a;
-  --color-error: #f2706a;
-  --color-info: #6ca8f0;
+@utility price {
+  font-family: var(--ff-body);
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums lining-nums;
 }
-
-/* ---------- Base ---------- */
+ 
+/* Durations  →  duration-fast (150ms) · duration-base (250ms) */
+@utility duration-fast {
+  transition-duration: var(--motion-fast);
+}
+@utility duration-base {
+  transition-duration: var(--motion-base);
+}
+ 
+/* Z-index scale  →  z-navbar, z-cartbar, z-scrim, z-drawer, z-modal, z-toast */
+@utility z-navbar { z-index: var(--z-navbar); }
+@utility z-cartbar { z-index: var(--z-cartbar); }
+@utility z-scrim { z-index: var(--z-scrim); }
+@utility z-drawer { z-index: var(--z-drawer); }
+@utility z-modal { z-index: var(--z-modal); }
+@utility z-toast { z-index: var(--z-toast); }
+ 
+/* Loading placeholder. Add motion-safe:animate-shimmer for the sweep. */
+@utility skeleton {
+  background-color: var(--skeleton-base);
+  background-image: linear-gradient(
+    90deg,
+    var(--skeleton-base) 25%,
+    var(--skeleton-shine) 50%,
+    var(--skeleton-base) 75%
+  );
+  background-size: 200% 100%;
+}
+ 
 @layer base {
   html {
     color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
-  html.dark {
-    color-scheme: dark;
+ 
+  /* Tailwind v4 defaults borders to currentColor — make them our 1px low-contrast tone */
+  *,
+  ::before,
+  ::after {
+    border-color: var(--border);
   }
+ 
   body {
-    @apply bg-background font-sans text-body text-fg antialiased;
+    @apply bg-page font-sans text-body text-ink antialiased;
   }
-
-  /* Focus: char ring on light surfaces, gold ring on dark ones */
+ 
+  h1, h2, h3, h4 {
+    @apply font-heading font-normal text-balance;
+    font-synthesis-weight: none; /* never fake-bold a single-weight serif */
+  }
+ 
+  p {
+    text-wrap: pretty;
+  }
+ 
+  ::selection {
+    background: var(--forest);
+    color: var(--parchment);
+  }
+ 
   :focus-visible {
-    outline: 2px solid var(--focus-ring, var(--color-char));
-    outline-offset: 2px;
+    outline: var(--focus-width) solid var(--focus-color);
+    outline-offset: var(--focus-offset);
   }
-  .dark,
+ 
+  /* Anything on a forest surface flips the ring to parchment (10.47:1) */
   .on-dark {
-    --focus-ring: var(--color-accent);
+    --focus-color: var(--parchment);
   }
-
+ 
   @media (prefers-reduced-motion: reduce) {
     *,
-    *::before,
-    *::after {
+    ::before,
+    ::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -209,3 +377,4 @@
     }
   }
 }
+ 

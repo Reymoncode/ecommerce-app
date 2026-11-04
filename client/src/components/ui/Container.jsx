@@ -1,3 +1,5 @@
-export default function Container({ children, className = '' }) {
-  return <div className={`mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 ${className}`}>{children}</div>;
+export function Container({ as: Tag = 'div', className = '', ...props }) {
+  return <Tag className={`mx-auto w-full max-w-site px-gutter ${className}`} {...props} />;
 }
+ 
+export default Container;
