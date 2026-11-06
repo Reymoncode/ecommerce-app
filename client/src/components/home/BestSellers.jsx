@@ -5,7 +5,7 @@ import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
 import { ProductCard } from '../ProductCard';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
-import { useProducts } from '../../hooks/useProducts';
+import { useProducts } from '../../hooks/useProduct';
 
 const BEST_SELLER_PARAMS = { badge: 'bestseller', limit: 4 };
 

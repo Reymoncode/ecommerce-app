@@ -8,7 +8,7 @@ import { ProductCard } from '../components/ProductCard';
 import { ProductCardSkeleton } from '../components/ProductCardSkeleton';
 import { CATEGORIES } from '../data/categories';
 import { BRAND } from '../config/brand';
-import { useProducts } from '../hooks/useProducts';
+import { useProducts } from '../hooks/useProduct';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 
