@@ -1,5 +1,4 @@
 import { useSearchParams } from 'react-router-dom';
-import toast from 'react-hot-toast';
 import { Container } from '../components/ui/Container';
 import { ButtonLink } from '../components/ui/ButtonLink';
 import { ErrorPanel } from '../components/ui/ErrorPanel';
@@ -9,13 +8,18 @@ import { ProductCardSkeleton } from '../components/ProductCardSkeleton';
 import { CATEGORIES } from '../data/categories';
 import { BRAND } from '../config/brand';
 import { useProducts } from '../hooks/useProduct';
+import { useQuickAdd } from '../hooks/useQuickAdd';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
-
+// The whole menu in one request (the API allows up to 50 items per page). Tabs then filter in the browser,
+// so switching categories is instant and never shows a loading state.
+// If the menu ever grows past 50 items, add paging here (the response includes `page`, `pages` and `total`).
 const MENU_PARAMS = { limit: 50 };
 
 const GRID = 'grid gap-card sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
 
+// Sections in the order of data/categories.js. A product whose category isn't listed there
+// still shows up (under "More") instead of vanishing.
 function buildSections(products, activeSlug) {
   const known = new Set(CATEGORIES.map((category) => category.slug));
   const sections = CATEGORIES.map((category) => ({
@@ -39,8 +43,7 @@ export default function Menu() {
   const sections = buildSections(data?.products ?? [], active);
   const activeName = CATEGORIES.find((category) => category.slug === active)?.name;
 
-  // Temporary until the cart exists
-  const handleAdd = (product) => toast(`${product.name}: the cart is coming soon`);
+  const handleAdd = useQuickAdd();
 
   return (
     <>

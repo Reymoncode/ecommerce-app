@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import { CircleAlert, RotateCw } from 'lucide-react';
-import toast from 'react-hot-toast';
 import { Container } from '../ui/Container';
 import { Button } from '../ui/Button';
 import { ProductCard } from '../ProductCard';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
 import { useProducts } from '../../hooks/useProduct';
+import { useQuickAdd } from '../../hooks/useQuickAdd';
 
 const BEST_SELLER_PARAMS = { badge: 'bestseller', limit: 4 };
 
@@ -13,8 +13,7 @@ export function BestSellers() {
   const { data, isPending, isError, refetch, isFetching } = useProducts(BEST_SELLER_PARAMS);
   const products = data?.products ?? [];
 
-  // Temporary until the cart exists
-  const handleAdd = (product) => toast(`${product.name}: the cart is coming soon`);
+  const handleAdd = useQuickAdd();
 
   // No best sellers at all: hide the section instead of showing an empty heading.
   if (!isPending && !isError && products.length === 0) return null;

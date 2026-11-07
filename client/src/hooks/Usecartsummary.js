@@ -1,5 +1,9 @@
+import { useCart } from './useCart';
+
+// What the navbar badge reads: how many items, and the subtotal.
 export function useCartSummary() {
-  return { count: 0, total: 0 };
+  const { count, subtotal } = useCart();
+  return { count, total: subtotal };
 }
- 
+
 export default useCartSummary;

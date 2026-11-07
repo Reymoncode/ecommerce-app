@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ChevronRight, CircleAlert } from 'lucide-react';
-import toast from 'react-hot-toast';
 import { Container } from '../components/ui/Container';
 import { Button } from '../components/ui/Button';
 import { ButtonLink } from '../components/ui/ButtonLink';
@@ -11,7 +10,9 @@ import { ProductBadges } from '../components/ProductBadges';
 import { ChoiceGroup } from '../components/product/ChoiceGroup';
 import { ToppingGroup } from '../components/product/ToppingGroup';
 import { QuantityStepper } from '../components/product/QuantityStepper';
+import { notifyAdded } from '../components/cart/cartToasts';
 import { BRAND } from '../config/brand';
+import { useCart } from '../hooks/useCart';
 import { useProduct } from '../hooks/useProduct';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { formatPrice } from '../utils/formatPrice';
@@ -58,6 +59,7 @@ function ProductView({ product }) {
   const toppings = product.toppings ?? [];
   const isCustomizable = sizes.length > 0 || crusts.length > 0 || toppings.length > 0;
   const available = product.isAvailable;
+  const { addItem } = useCart();
 
   // Size and crust always have one chosen (the first), so a pizza can't be added with nothing picked.
   const [sizeId, setSizeId] = useState(sizes[0]?._id ?? null);
@@ -83,10 +85,19 @@ function ProductView({ product }) {
     event.preventDefault();
     if (!available) return;
 
-    // Temporary until the cart exists: the toast echoes the choices so you can check them.
-    // The cart step will store product id, size id, crust id, topping ids and quantity from here.
-    const details = [size?.name, crust?.name, ...chosenToppings.map((t) => `+${t.name}`)].filter(Boolean).join(', ');
-    toast(`${quantity} × ${product.name}${details ? ` (${details})` : ''}: the cart is coming soon`);
+    addItem({
+      productId: product.id,
+      slug: product.slug,
+      name: product.name,
+      image: product.image ?? '',
+      sizeId,
+      crustId,
+      toppingIds: chosenToppings.map((t) => t._id),
+      options: [size?.name, crust?.name, ...chosenToppings.map((t) => `+${t.name}`)].filter(Boolean),
+      unitPrice,
+      quantity,
+    });
+    notifyAdded(product.name, quantity);
   };
 
   return (
